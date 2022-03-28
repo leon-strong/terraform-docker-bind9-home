@@ -1,0 +1,12 @@
+.envrc
+.terraform
+.vscode
+*terraform.tfstate*
+*terraform.tf*
+*terraform.tfvars*
+*/.terraform/*
+local/*
+terraform.plan
+local-env.sh
+states/*
+certificate-authority/ca.crt

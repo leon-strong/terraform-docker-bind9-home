@@ -1,0 +1,19 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL	0
+@	IN	SOA	reliance.prospere.kiwi.nz. root.prospere.kiwi.nz. (
+			      7		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			      30	; Expire
+			    300 )	; Negative Cache TTL
+;
+@	IN	NS	localhost.
+@	IN	NS	jabber.net.nz.
+@	IN 	NS	reliance.prospere.kiwi.nz.
+@	IN	A	103.18.59.105
+manukau	IN	CNAME	manukau.dyn.jabber.net.nz.
+christchurch	IN	CNAME  christchurch.dyn.jabber.net.nz.
+dev           IN  A 103.18.59.105
+
