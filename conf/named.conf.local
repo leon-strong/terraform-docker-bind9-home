@@ -8,45 +8,6 @@ acl "homelan" {
   127.0.0.0/8;
 };
 
-view "christchurch" {
-  match-clients { 203.97.204.62/32; }; // our network
-  recursion no;
-  // other view statements as required
-  zone "reliance.prospere.kiwi.nz" {
-    type master;
-    file "/etc/bind/db.reliance.prospere.kiwi.nz.chc";
-  };
-};
-
-view "manukau" {
-  match-clients { 163.47.228.207/32; }; // our network
-  recursion no;
-  // other view statements as required
-  zone "reliance.prospere.kiwi.nz" {
-    type master;
-    file "/etc/bind/db.reliance.prospere.kiwi.nz.man";
-  };
-};
-
-view "manukau-local" {
-  match-clients { 192.168.0.0/24; }; // our network
-  recursion yes;
-  // other view statements as required
-  zone "reliance.prospere.kiwi.nz" {
-    type master;
-    file "/etc/bind/db.reliance.prospere.kiwi.nz.man";
-  };
-};
-view "christchurch-local" {
-  match-clients { 10.1.1.0/24; }; // our network
-  recursion yes;
-  // other view statements as required
-  zone "reliance.prospere.kiwi.nz" {
-    type master;
-    file "/etc/bind/db.reliance.prospere.kiwi.nz.man";
-  };
-};
-
 view "internal" { 
 
  match-clients { homelan; }; // all other hosts
@@ -54,22 +15,14 @@ view "internal" {
 
  recursion yes;
  // other view statements as required
-  forwarders {
+ forwarders {
    202.37.245.17;
    202.37.245.20;
-   #176.103.130.130;
-   #176.103.130.131;
  };
 
  zone "reliance.prospere.kiwi.nz" {
    type master;
    file "/etc/bind/db.reliance.prospere.kiwi.nz";
- };
-
- zone "consul" {
-   type forward;
-   forward only;
-   forwarders { 192.168.178.90 port 8600; 192.168.178.88 port 8600; 192.168.178.91 port 8600;  };
  };
 
  zone "dyn.homenet" {
@@ -86,12 +39,12 @@ view "internal" {
 
  zone "homenet" {
    type master;
-   file "/var/lib/bind/db.homenet";
+   file "/etc/bind/db.homenet";
    allow-update { 
      127.0.0.1;
    };
  };
-
+ include "/etc/bind/named.conf.default-zones";
 };
 
 
@@ -111,4 +64,6 @@ view "external" {
    type master;
    file "/etc/bind/db.reliance.prospere.kiwi.nz";
  };
+
+ include "/etc/bind/named.conf.default-zones";
 };

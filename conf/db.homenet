@@ -1,0 +1,21 @@
+$ORIGIN .
+$TTL 30 ; 0 seconds
+homenet                 IN SOA  homenet. root.homenet. (
+                                30         ; serial
+                                604800     ; refresh (1 week)
+                                86400      ; retry (1 day)
+                                30         ; expire (30 seconds)
+                                30         ; minimum (5 minutes)
+                                )
+                        NS      keppler.homenet.
+                        A 192.168.178.88
+$ORIGIN homenet.
+dyn-ns1                 A 192.168.182.11
+keppler                 A 192.168.178.88
+dyn.homenet             NS dyn-ns1.homenet.
+_apt_proxy._tcp       SRV 10 1 3142 keppler.homenet.
+
+
+; dyn.homenet forwarder is in /etc/bind/bind.options.local
+$ORIGIN dyn.homenet.
+@       NS coredns.homenet.

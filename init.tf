@@ -9,9 +9,5 @@ terraform {
 # Configure the Docker provider
 provider "docker" {
   #host =  "unix:///var/run/docker.sock"
-  host = "ssh://${local.docker_host}"
-}
-
-locals {
-  docker_host = data.terraform_remote_state.ca.outputs.docker_host
+  host = "ssh://${var.docker_host}"
 }
